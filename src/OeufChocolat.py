@@ -3,8 +3,12 @@ import random
 
 
 class OeufChocolat(pygame.sprite.Sprite):
-    def __init__(self , width , heigth):
+    def __init__(self , width , heigth, player):
         super().__init__()
+        self.player = player
+        self.player_group = pygame.sprite.Group()
+        self.player_group.add(self.player)
+        ################################
         self.image = pygame.image.load("assets/carrot.png")
         self.image = pygame.transform.scale(self.image , (40 , 40))
         self.velocity = random.randint(1 , 4)
@@ -14,12 +18,6 @@ class OeufChocolat(pygame.sprite.Sprite):
 
     def remove(self):
         self.remove()
-
-    def repositionner(self):
-        # reteleporter l'oeuf en haut
-        self.rect.x = random.randint(20, self.rect.x - 40)
-        self.rect.y = - self.image.get_height()
-        self.velocity = random.randint(1, 3)
 
     def gravity(self):
         self.rect.y += self.velocity

@@ -2,7 +2,7 @@ import pygame
 
 import random
 
-from src.Game import Game
+from src.Panier import Panier
 
 from src.OeufChocolat import OeufChocolat
 
@@ -18,6 +18,9 @@ pygame.init()
 pygame.display.set_caption(" Easter Bunny ")
 pygame.display.set_icon(pygame.image.load('assets/carrot.png'))
 screen = pygame.display.set_mode((800 , 480))
+
+largeur = random.randint(0 , 470)
+hauteur = 0
 # ]
 
 # Les images [
@@ -25,16 +28,17 @@ background = pygame.image.load('assets/fond.jpg')
 ground = pygame.image.load('assets/sol.png')
 # ]
 run = True
+pressed = {}
 
-game = Game()
+player = Panier()
 
-oeuf = OeufChocolat(random.randint(0, 470), 0)
+Egg = OeufChocolat(largeur, hauteur, player)
+oeufs = pygame.sprite.Group()
 
 # Boucle qui s'exetue [
 while run:
-    game.tg()
-
-    game.player_Sprite.draw(screen)
+    oeufs.add(Egg)
+    oeufs.add(Egg)
     # Appliquer le fond
     screen.blit(background , (0 , 0))
 
@@ -42,19 +46,20 @@ while run:
     screen.blit(ground , (0 , 0))
 
     # Appliquer l'image du player
-    screen.blit(game.player.image , game.player.rect)
-    
-    # Appliquer l'image de l'oeuf
-    for oeuf in game.eggs_sprite:
-        oeuf.gravity()
+    screen.blit(player.image , player.rect)
 
+    oeufs.draw(screen)
 
 
     # Mouvement du joueur
-    if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
-        game.player.move_right()
-    elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-        game.player.move_left()
+    if pressed.get(pygame.K_RIGHT) and player.rect.x + player.rect.width < screen.get_width():
+        player.move_right()
+    elif pressed.get(pygame.K_LEFT) and player.rect.x > 0:
+        player.move_left()        
+
+
+    for oeuf in oeufs:
+        oeuf.gravity()
 
     # Mettre a jour l'ecran
     pygame.display.flip()
@@ -73,8 +78,8 @@ while run:
             print(" ❌ Fermeture de la fenêtre PyGame ! ")
 
         elif event.type == pygame.KEYDOWN:
-            game.pressed[event.key] = True
+            pressed[event.key] = True
 
         elif event.type == pygame.KEYUP:
-            game.pressed[event.key] = False
+            pressed[event.key] = False
 # ]
