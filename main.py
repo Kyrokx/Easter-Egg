@@ -1,6 +1,11 @@
 import pygame
 
+import random
+
 from src.Game import Game
+
+from src.OeufChocolat import OeufChocolat
+
 
 print(" ============================================ ")
 print(" By Kyrokx()#7573 🦊 ")
@@ -11,7 +16,7 @@ pygame.init()
 
 # Information de la fenêtre [
 pygame.display.set_caption(" Easter Bunny ")
-pygame.display.set_icon(pygame.image.load('assets/panier.png'))
+pygame.display.set_icon(pygame.image.load('assets/carrot.png'))
 screen = pygame.display.set_mode((800 , 480))
 # ]
 
@@ -23,9 +28,13 @@ run = True
 
 game = Game()
 
+oeuf = OeufChocolat(random.randint(0, 470), 0)
+
 # Boucle qui s'exetue [
 while run:
+    game.tg()
 
+    game.player_Sprite.draw(screen)
     # Appliquer le fond
     screen.blit(background , (0 , 0))
 
@@ -34,6 +43,12 @@ while run:
 
     # Appliquer l'image du player
     screen.blit(game.player.image , game.player.rect)
+    
+    # Appliquer l'image de l'oeuf
+    for oeuf in game.eggs_sprite:
+        oeuf.gravity()
+
+
 
     # Mouvement du joueur
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():

@@ -8,10 +8,10 @@ class Panier(pygame.sprite.Sprite):
         # Information du Sprite
         self.velocity = 3
         self.image = pygame.image.load('assets\panier.png')  # Image de dépard
-        self.image = pygame.transform.scale(self.image , (205 , 205))  # Image rétréci
+        self.image = pygame.transform.scale(self.image , (120 , 120))  # Image rétréci
         self.rect = self.image.get_rect()
-        self.rect.x = 205
-        self.rect.y = 205
+        self.rect.x = 285
+        self.rect.y = 285
 
     # Bouger a droite
     def move_right(self):
