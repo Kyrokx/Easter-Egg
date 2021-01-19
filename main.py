@@ -32,7 +32,7 @@ pressed = {}
 
 player = Panier()
 
-Egg = OeufChocolat(largeur, hauteur, player)
+Egg = OeufChocolat(largeur, hauteur, player, 800)
 oeufs = pygame.sprite.Group()
 oeufs.add(Egg)
 oeufs.add(Egg)

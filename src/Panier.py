@@ -6,7 +6,7 @@ class Panier(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         # Information du Sprite
-        self.velocity = 3
+        self.velocity = 6
         self.image = pygame.image.load('assets\panier.png')  # Image de dépard
         self.image = pygame.transform.scale(self.image , (120 , 120))  # Image rétréci
         self.rect = self.image.get_rect()
