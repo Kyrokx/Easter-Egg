@@ -16,20 +16,14 @@ class OeufChocolat(pygame.sprite.Sprite):
         self.rect.x = width
         self.rect.y = heigth
 
-    def remove(self):
-        self.remove()
+    def repositionner(self):
+        self.rect.x = random.randint(20, 800 - 40)
+        self.rect.y = - self.image.get_height()
+        self.vitesse_chute = random.randint(1, 3)
 
     def gravity(self):
         self.rect.y += self.velocity
 
-        if self.rect.y >= 300:
-            pass
-            # self.remove()
-
-        # # verifier si la boule de jeu touche le joueur
-        # if self.game.check_collision(
-        #         self , self.game.player_Sprite
-        # ):
-        #     print(" 👊 Toucher ! ")
-        #     # retirer la boule de feu
-        #     self.remove()
+        if pygame.sprite.spritecollide(self, self.player_group, False, pygame.sprite.collide_mask) and self.rect.y >= 360:
+             print("Collision", self.rect.y)
+             self.repositionner()

@@ -34,11 +34,13 @@ player = Panier()
 
 Egg = OeufChocolat(largeur, hauteur, player)
 oeufs = pygame.sprite.Group()
-
+oeufs.add(Egg)
+oeufs.add(Egg)
+oeufs.add(Egg)
+oeufs.add(Egg)
 # Boucle qui s'exetue [
 while run:
-    oeufs.add(Egg)
-    oeufs.add(Egg)
+
     # Appliquer le fond
     screen.blit(background , (0 , 0))
 
